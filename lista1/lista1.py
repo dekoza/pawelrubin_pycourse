@@ -73,7 +73,11 @@ def roman_to_arabic(roman):
 
 def sequence_matcher(pattern, sequences):
     pattern_dict = {i: c for i, c in enumerate(pattern) if c != "*"}
-    return [s for s in sequences if all(s[i] == c for i, c in pattern_dict.items())]
+    return [
+        s
+        for s in sequences
+        if all(s[i] == c for i, c in pattern_dict.items()) and len(pattern) == len(s)
+    ]
 
 
 def sequence_matcher_better(pattern, sequences):
@@ -81,12 +85,8 @@ def sequence_matcher_better(pattern, sequences):
         s
         for s in sequences
         if all(s[i] == c for i, c in enumerate(pattern) if c != "*")
+        and len(pattern) == len(s)
     ]
 
 
-print(
-    sequence_matcher(
-        "a**a******", ["aababacaa", "cabaabcca", "aaabbcbacb", "acababbaab"]
-    )
-)
 

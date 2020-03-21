@@ -87,6 +87,3 @@ def sequence_matcher_better(pattern, sequences):
         if all(s[i] == c for i, c in enumerate(pattern) if c != "*")
         and len(pattern) == len(s)
     ]
-
-
-

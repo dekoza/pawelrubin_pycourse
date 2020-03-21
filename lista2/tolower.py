@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 
 def to_lower(path):
@@ -15,9 +15,7 @@ def to_lower(path):
 
 if __name__ == "__main__":
     try:
-        path = sys.argv[1]
-
-        to_lower(path)
+        to_lower(sys.argv[1])
 
     except IndexError:
         print("path is required")

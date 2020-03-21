@@ -1,15 +1,14 @@
-from typing import Generator, List
+from typing import Generator, Iterable, List
 
 
 def transpose(m: List[str]) -> List[str]:
     return [" ".join(row.split()[i] for row in m) for i in range(len(m))]
 
 
-def flatten(_list: list) -> Generator:
-    for e in _list:
-        if isinstance(e, list):
-            for ee in flatten(e):
-                yield ee
+def flatten(items: Iterable) -> Generator:
+    for e in items:
+        if isinstance(e, Iterable) and not isinstance(e, (str, bytes)):
+            yield from flatten(e)
         else:
             yield e
 

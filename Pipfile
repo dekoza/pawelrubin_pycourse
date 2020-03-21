@@ -9,6 +9,9 @@ pylint = "*"
 isort = "*"
 flake8 = "*"
 pre-commit = "*"
+mypy = "*"
+bandit = "*"
+pyupgrade = "*"
 
 [packages]
 ipython = "*"

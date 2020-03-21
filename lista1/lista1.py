@@ -26,8 +26,8 @@ def primes(n):
     return [i for i in range(2, n) if is_prime(i)]
 
 
-def make_unique(l):
-    return list(dict.fromkeys(l))
+def make_unique(_list):
+    return list(dict.fromkeys(_list))
 
 
 def prime_factors(n):
@@ -51,7 +51,7 @@ def fraczero(n):
 
 
 def random_vector():
-    vector = [random.randint(1, 100) for i in range(20)]
+    vector = [random.randint(1, 100) for i in range(20)]  # nosec
     print(f"random vector: {vector}")
     print(f"mean: {statistics.mean(vector)}")
     print(f"min, max: {min(vector)}, {max(vector)}")

@@ -2,14 +2,14 @@ BASE64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
 
 def encode(source: str) -> str:
-    bitstring = "".join(format(ord(c), "b").zfill(8) for c in source)
-    bitstring += "0" * (6 - len(bitstring) % 6)
+    bitstring = "".join("{:08b}".format(ord(c)) for c in source)
+    bitstring += "0" * abs(len(bitstring) % -6)
     sextets = [bitstring[n : n + 6] for n in range(0, len(bitstring) - 5, 6)]
-    return "".join(BASE64[int(b, 2)] for b in sextets)
+    return "".join(BASE64[int(b, 2)] for b in sextets) + "=" * abs(len(sextets) % -3)
 
 
 def decode(encoded: str) -> str:
-    bitstring = "".join(format(BASE64.index(c), "b").zfill(6) for c in encoded)
+    bitstring = "".join("{:06b}".format(BASE64.index(c)) for c in encoded if c != "=")
     octets = [bitstring[n : n + 8] for n in range(0, len(bitstring) - 7, 8)]
     return "".join(chr(int(oct, 2)) for oct in octets)
 

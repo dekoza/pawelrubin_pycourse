@@ -10,7 +10,6 @@ def encode(source: str) -> str:
 
 def decode(encoded: str) -> str:
     bitstring = "".join(format(BASE64.index(c), "b").zfill(6) for c in encoded)
-    bitstring += "0" * (8 - len(bitstring) % 8)
     octets = [bitstring[n : n + 8] for n in range(0, len(bitstring) - 7, 8)]
     return "".join(chr(int(oct, 2)) for oct in octets)
 
@@ -22,11 +21,13 @@ if __name__ == "__main__":
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--encode", action="store_true")
     group.add_argument("--decode", action="store_true")
-    parser.add_argument("text")
+    parser.add_argument("inputfile")
+    parser.add_argument("outputfile")
 
     args = parser.parse_args()
 
-    if args.encode:
-        print(encode(args.text))
-    else:
-        print(decode(args.text))
+    with open(args.inputfile) as inputf, open(args.outputfile, "w") as outputf:
+        if args.encode:
+            outputf.write(encode(inputf.read()))
+        else:
+            outputf.write(decode(inputf.read()))

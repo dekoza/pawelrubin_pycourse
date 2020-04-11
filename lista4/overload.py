@@ -19,12 +19,15 @@ class Overload:
                 *args, type_signature=type_signature, **kwargs
             ):
                 return function(*args, **kwargs)
-        return TypeError
+        raise TypeError
 
     @staticmethod
     def get_type_signature(function: Callable) -> TypeSignature:
         fullargspec = getfullargspec(function)
-        get_annotation = lambda arg: fullargspec.annotations.get(arg, object)
+
+        def get_annotation(arg):
+            return fullargspec.annotations.get(arg, object)
+
         return (
             tuple(map(get_annotation, fullargspec.args,)),
             tuple((kwarg, get_annotation(kwarg)) for kwarg in fullargspec.kwonlyargs),
@@ -68,20 +71,29 @@ def overload(function: Callable):
 
 if __name__ == "__main__":
 
-    @overload
-    def foo(x, *, y: int = 0):
-        return 2
+    # @overload
+    # def foo(x, *, y: int = 0):
+    #     return 2
+
+    # @overload
+    # def foo(x, y):
+    #     return 1
+
+    # @overload
+    # def foo(x):
+    #     return 0
+
+    # print(f"foo(x=1, y=2.0) = {foo(x=1, y=2.0)}")
+    # print(f"foo(1, y=2)     = {foo(1, y=2)}")
+    # print(f"foo(1)          = {foo(1)}")
+    # print(f"foo(x=1, y=2)   = {foo(x=1, y=2)}")
 
     @overload
-    def foo(x, y):
-        return 1
-
+    def foo(x: int):
+        print("int")
 
     @overload
-    def foo(x):
-        return 0
+    def foo(x: float):
+        print("any type")
 
-    print(f"foo(x=1, y=2.0) = {foo(x=1, y=2.0)}")
-    print(f"foo(1, y=2)     = {foo(1, y=2)}")
-    print(f"foo(1)          = {foo(1)}")
-    print(f"foo(x=1, y=2)   = {foo(x=1, y=2)}")
+    foo([1, 2, 3])

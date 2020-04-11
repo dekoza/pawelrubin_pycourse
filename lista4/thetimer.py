@@ -35,5 +35,6 @@ if __name__ == "__main__":
     @timer
     def test_timer():
         time.sleep(1)
+        raise Exception
 
     test_timer()

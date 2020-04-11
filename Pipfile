@@ -16,6 +16,7 @@ pyupgrade = "*"
 [packages]
 ipython = "*"
 jupyter = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.8"

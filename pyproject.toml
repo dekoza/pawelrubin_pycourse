@@ -5,11 +5,13 @@ authors = [""]
 version = "0.0.0"
 
 [tool.poetry.dependencies]
-python = "==3.8"
+python = "^3.8"
 ipython = "*"
-jupyter = "*"
 numpy = "*"
 pandas = "*"
+requests = "^2.23.0"
+matplotlib = "^3.2.1"
+sklearn = "^0.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "*"

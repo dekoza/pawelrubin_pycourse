@@ -7,7 +7,9 @@ def random_tree(height: int):
             return {"tree": None, "height": 0}
 
         probs = (
-            [1.0, random.random()] if match_max else [random.random(), random.random()]
+            [1.0, random.random()]
+            if match_max
+            else [random.random(), random.random()]
         )
         random.shuffle(probs)
 
@@ -62,7 +64,6 @@ def main():
     tree = random_tree(5)
 
     print(tree["tree"])
-
 
 
 if __name__ == "__main__":

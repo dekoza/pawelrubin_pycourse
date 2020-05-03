@@ -15,8 +15,11 @@ class Overload:
 
     def __call__(self, *args, **kwargs):
         for (name, type_signature), function in self.functions.items():
-            if name == self.function.__name__ and self.does_type_signature_match(
-                *args, type_signature=type_signature, **kwargs
+            if (
+                name == self.function.__name__
+                and self.does_type_signature_match(
+                    *args, type_signature=type_signature, **kwargs
+                )
             ):
                 return function(*args, **kwargs)
         raise TypeError
@@ -30,7 +33,10 @@ class Overload:
 
         return (
             tuple(map(get_annotation, fullargspec.args,)),
-            tuple((kwarg, get_annotation(kwarg)) for kwarg in fullargspec.kwonlyargs),
+            tuple(
+                (kwarg, get_annotation(kwarg))
+                for kwarg in fullargspec.kwonlyargs
+            ),
         )
 
     @staticmethod
@@ -53,7 +59,8 @@ class Overload:
         return (
             len(positionals) == len(type_signature[0])
             and all(
-                isinstance(arg, typ) for arg, typ in zip(positionals, type_signature[0])
+                isinstance(arg, typ)
+                for arg, typ in zip(positionals, type_signature[0])
             )
             and len(kwonly) == len(type_signature[1])
             and all(

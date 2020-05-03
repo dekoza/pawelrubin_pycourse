@@ -17,7 +17,9 @@ def repchecker(dirpath):
         for dirpath, dirnames, filenames in os.walk(p):
             for filename in filenames:
                 filepath = os.path.join(dirpath, filename)
-                file_dict[(os.stat(filename).st_size, sha512(filepath))] += [filepath]
+                file_dict[(os.stat(filename).st_size, sha512(filepath))] += [
+                    filepath
+                ]
             for dirname in dirnames:
                 file_dict = {
                     **file_dict,

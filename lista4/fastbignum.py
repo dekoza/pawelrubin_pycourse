@@ -19,7 +19,10 @@ def idft(x, n):
     return [
         int(
             round(
-                sum(x[i] * omega(-i * k, n) if i < len(x) else 0 for i in range(n)).real
+                sum(
+                    x[i] * omega(-i * k, n) if i < len(x) else 0
+                    for i in range(n)
+                ).real
             )
             / n
         )

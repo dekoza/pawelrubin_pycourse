@@ -14,7 +14,8 @@ def print_triangle(triangle):
 
 def pascal_triangle(n):
     return [row := [1]] + [
-        row := [1] + [n + m for n, m in zip(row, row[1:])] + [1] for i in range(n)
+        row := [1] + [n + m for n, m in zip(row, row[1:])] + [1]
+        for i in range(n)
     ]
 
 
@@ -60,10 +61,21 @@ def random_vector():
 
 
 def roman_to_arabic(roman):
-    roman_numerals = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    roman_numerals = {
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000,
+    }
     arabic = 0
     for i, r in enumerate(roman):
-        if i == len(roman) - 1 or roman_numerals[r] >= roman_numerals[roman[i + 1]]:
+        if (
+            i == len(roman) - 1
+            or roman_numerals[r] >= roman_numerals[roman[i + 1]]
+        ):
             arabic += roman_numerals[r]
         else:
             arabic -= roman_numerals[r]
@@ -76,7 +88,8 @@ def sequence_matcher(pattern, sequences):
     return [
         s
         for s in sequences
-        if all(s[i] == c for i, c in pattern_dict.items()) and len(pattern) == len(s)
+        if all(s[i] == c for i, c in pattern_dict.items())
+        and len(pattern) == len(s)
     ]
 
 

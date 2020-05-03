@@ -25,4 +25,8 @@ def qsort(xs: List[int]) -> List[int]:
 
 
 def subsets(xs: list) -> List[list]:
-    return subsets(xs[1:]) + [x + [xs[0]] for x in subsets(xs[1:])] if xs else [[]]
+    return (
+        subsets(xs[1:]) + [x + [xs[0]] for x in subsets(xs[1:])]
+        if xs
+        else [[]]
+    )

@@ -45,7 +45,9 @@ class Node:
             gen_children_prob = (
                 [
                     random.random()
-                    for _ in range(random.randrange(children_min, children_max))
+                    for _ in range(
+                        random.randrange(children_min, children_max)
+                    )
                 ]
                 + [1.0]
                 if match_max

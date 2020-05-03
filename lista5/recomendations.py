@@ -52,10 +52,16 @@ def get_recommended_movies(movies, ratings, user_ratings, count=10):
 def main():
     movies, ratings = get_movies_and_ratings()
 
-    recommendations = get_recommended_movies(movies, ratings, test_ratings())
+    user_profile = test_ratings()
+    count = 10
+    recommendations = get_recommended_movies(
+        movies, ratings, user_profile, count
+    )
 
-    for i, recommendation in enumerate(recommendations):
-        print(f"{i+1}.\t{recommendation[0]}\t{recommendation[1]}")
+    print(f"Top {count} recommendations.")
+    print("Score\t\t\tTitle")
+    for score, movie in recommendations:
+        print(f"{score}\t{movie}")
 
 
 if __name__ == "__main__":

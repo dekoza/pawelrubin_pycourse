@@ -10,6 +10,8 @@ if __name__ == "__main__":
             lines = list(file)
             print(f"liczba słów: {sum(len(line.split()) for line in lines)}")
             print(f"liczba linii: {len(lines)}")
-            print(f"maksymalna długość linii: {max(len(line) for line in lines)}")
+            print(
+                f"maksymalna długość linii: {max(len(line) for line in lines)}"
+            )
     except IndexError:
         print("Podaj plik wejściowy...")

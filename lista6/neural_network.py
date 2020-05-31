@@ -1,24 +1,26 @@
-from typing import NamedTuple, Optional
+from typing import Callable, NamedTuple, Optional
 import numpy as np
 
 
 class Activator(NamedTuple):
-    activation_function: callable
-    activation_derivative: callable
+    activation_function: Callable[[np.ndarray], np.ndarray]
+    activation_derivative: Callable[[np.ndarray], np.ndarray]
 
 
-sigmoid = Activator(lambda x: 1.0 / (1 + np.exp(-x)), lambda x: x * (1 - x))
+sigmoid = Activator(
+    lambda x: 1.0 / (1.0 + np.exp(-x)), lambda x: x * (1.0 - x)
+)
 
 relu = Activator(lambda x: x * (x > 0), lambda x: np.where(x > 0.0, 1.0, 0.0))
 
-tanh = Activator(lambda x: np.tanh(x), lambda x: (1.0 / np.cosh(x)) ** 2)
+tanh = Activator(lambda x: np.tanh(x), lambda x: 1.0 - x ** 2)
 
 
 class NeuralNetwork:
     def __init__(
         self,
-        x,
-        y,
+        x: np.ndarray,
+        y: np.ndarray,
         act1: Activator,
         act2: Activator,
         seed: Optional[int] = None,
